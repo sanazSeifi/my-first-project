@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
 
-function MyFirstComponent(props) {
+interface Props{
+  buttonTitle:string,
+  onInputChange : (value : string) => void,
+}
+
+function MyFirstComponent(props : Props) {
   const [show, setShow] = useState(false);
   const [show1, setShow1] = useState(false);
   useEffect(() => {
     console.log("salam Man Be Donia Amadam");
+    console.log(props)
   }, []);
   useEffect(
     () => () => {
@@ -15,7 +21,9 @@ function MyFirstComponent(props) {
 useEffect(() => {console.log("Show Avaz Shod")}, [show])
 useEffect(() => {console.log("show1 Avaz Shod")}, [show1])
 useEffect(() => {console.log("show ya show1 ya Props.buttonTitle Avaz Shod ")}, [show , show1 , props.buttonTitle])
-
+function consoler(e : any){
+  console.log(e.target.value, e);
+}
   return (
     <>
       <div onClick={() => setShow(!show)}>showChange</div>
@@ -23,7 +31,8 @@ useEffect(() => {console.log("show ya show1 ya Props.buttonTitle Avaz Shod ")}, 
       <label>child button</label>
       <button>{props.buttonTitle}</button>
       <label>child Input</label>
-      <input onChange={(e) => {props.onInputChange(e.target.value)}} />
+      {/* <input onChange={(e: any) => consoler({...e})} /> */}
+      <input onChange={(e: any) => {props.onInputChange(e.target.value)}} />
     </>
   );
 }
